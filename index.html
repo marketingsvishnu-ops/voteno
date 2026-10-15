@@ -1,0 +1,2758 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soltwatnews | Cricket News, Live Scores & Match Updates</title>
+
+<meta name="description"
+content="Soltwatnews - Cricket news, match updates, live scores, tournament coverage, previews and cricket blogs.">
+
+<style>
+:root{
+    --bg:#020b08;
+    --bg2:#061a12;
+    --card:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.13);
+    --green:#00e58d;
+    --lime:#d9ff45;
+    --white:#f4fffb;
+    --muted:#91aaa0;
+    --red:#ff4055;
+    --gold:#ffd85c;
+    --shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--white);
+    background:
+        radial-gradient(circle at 10% 10%,rgba(0,229,141,.12),transparent 25%),
+        radial-gradient(circle at 90% 25%,rgba(217,255,69,.07),transparent 25%),
+        linear-gradient(145deg,var(--bg),var(--bg2));
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-3;
+    background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:55px 55px;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,input{
+    font-family:inherit;
+}
+
+.container{
+    width:min(1220px,92%);
+    margin:auto;
+}
+
+/* FLOATING LIGHTS */
+
+.light{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
+    filter:blur(5px);
+    opacity:.25;
+}
+
+.light1{
+    width:300px;
+    height:300px;
+    left:-160px;
+    top:180px;
+    background:var(--green);
+    box-shadow:0 0 150px var(--green);
+}
+
+.light2{
+    width:230px;
+    height:230px;
+    right:-110px;
+    top:55%;
+    background:var(--lime);
+    box-shadow:0 0 130px var(--lime);
+}
+
+/* TOP BAR */
+
+.topbar{
+    min-height:36px;
+    border-bottom:1px solid var(--line);
+    background:rgba(0,0,0,.25);
+    backdrop-filter:blur(15px);
+}
+
+.topbar-inner{
+    min-height:36px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.top-links{
+    display:flex;
+    gap:18px;
+}
+
+.top-links a:hover{
+    color:var(--green);
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(2,11,8,.82);
+    backdrop-filter:blur(25px);
+    border-bottom:1px solid var(--line);
+}
+
+.header{
+    height:78px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-size:24px;
+    font-weight:1000;
+    letter-spacing:-1px;
+}
+
+.logo-box{
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    color:#03120c;
+    background:linear-gradient(145deg,var(--lime),var(--green));
+    box-shadow:
+        inset 3px 3px 8px rgba(255,255,255,.5),
+        inset -5px -5px 10px rgba(0,0,0,.22),
+        0 12px 35px rgba(0,229,141,.2);
+    transform:perspective(300px) rotateX(8deg) rotateY(-8deg);
+}
+
+.logo-box span{
+    font-size:22px;
+    font-weight:1000;
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    gap:23px;
+}
+
+.nav a{
+    position:relative;
+    color:#b7cec5;
+    font-size:11px;
+    font-weight:800;
+}
+
+.nav a:after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-9px;
+    width:0;
+    height:2px;
+    background:var(--green);
+    transition:.3s;
+}
+
+.nav a:hover{
+    color:#fff;
+}
+
+.nav a:hover:after{
+    width:100%;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.search{
+    width:180px;
+    padding:11px 15px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    outline:none;
+    color:#fff;
+    background:rgba(255,255,255,.06);
+}
+
+.search:focus{
+    border-color:var(--green);
+}
+
+.menu{
+    display:none;
+    width:42px;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--card);
+    color:#fff;
+    font-size:19px;
+}
+
+/* BREAKING NEWS */
+
+.breaking{
+    background:linear-gradient(90deg,#ff263d,#c9152c);
+    box-shadow:0 8px 35px rgba(255,40,60,.17);
+}
+
+.breaking-inner{
+    min-height:42px;
+    display:flex;
+    align-items:center;
+}
+
+.breaking-label{
+    padding:12px 17px;
+    background:rgba(0,0,0,.22);
+    font-size:9px;
+    font-weight:1000;
+    letter-spacing:1px;
+}
+
+.ticker{
+    flex:1;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-text{
+    display:inline-block;
+    padding-left:30px;
+    font-size:11px;
+    font-weight:800;
+    animation:ticker 28s linear infinite;
+}
+
+@keyframes ticker{
+    from{
+        transform:translateX(100%);
+    }
+    to{
+        transform:translateX(-100%);
+    }
+}
+
+/* HERO */
+
+.hero{
+    padding:55px 0 35px;
+}
+
+.hero-layout{
+    display:grid;
+    grid-template-columns:1.55fr .85fr;
+    gap:24px;
+}
+
+.hero-main{
+    min-height:550px;
+    padding:42px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:30px;
+    box-shadow:var(--shadow);
+    background:
+        linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.9)),
+        url("https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=1600&q=90")
+        center/cover;
+    transform-style:preserve-3d;
+    transition:.4s;
+}
+
+.hero-main:hover{
+    transform:perspective(1300px) rotateX(1deg) rotateY(-1deg) translateY(-5px);
+}
+
+.hero-main:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,rgba(0,229,141,.14),transparent 45%);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:720px;
+}
+
+.pill{
+    display:inline-flex;
+    padding:7px 12px;
+    margin-bottom:17px;
+    border-radius:30px;
+    color:var(--lime);
+    background:rgba(217,255,69,.1);
+    border:1px solid rgba(217,255,69,.35);
+    font-size:9px;
+    font-weight:1000;
+    letter-spacing:1px;
+}
+
+.hero h1{
+    font-size:clamp(38px,5.5vw,68px);
+    line-height:.98;
+    letter-spacing:-3px;
+    margin-bottom:18px;
+}
+
+.hero h1 span{
+    color:var(--green);
+}
+
+.hero-description{
+    max-width:650px;
+    color:#c2d2cc;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:43px;
+    padding:0 17px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    font-size:10px;
+    font-weight:1000;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-green{
+    color:#03130d;
+    background:linear-gradient(145deg,var(--lime),var(--green));
+    box-shadow:0 12px 30px rgba(0,229,141,.2);
+}
+
+.btn-green:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 40px rgba(0,229,141,.32);
+}
+
+.btn-dark{
+    color:#fff;
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(12px);
+}
+
+.btn-dark:hover{
+    background:rgba(255,255,255,.14);
+    transform:translateY(-3px);
+}
+
+/* HERO SIDE */
+
+.hero-side{
+    display:grid;
+    gap:16px;
+}
+
+.hero-news{
+    min-height:172px;
+    display:grid;
+    grid-template-columns:125px 1fr;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:21px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(17px);
+    transition:.35s;
+    transform-style:preserve-3d;
+}
+
+.hero-news:hover{
+    transform:perspective(1000px) rotateY(-4deg) translateY(-5px);
+    border-color:rgba(0,229,141,.4);
+}
+
+.hero-news img{
+    width:100%;
+    height:100%;
+    min-height:172px;
+    object-fit:cover;
+}
+
+.hero-news-content{
+    padding:17px;
+}
+
+.hero-news-content small{
+    color:var(--green);
+    font-size:9px;
+    font-weight:1000;
+    text-transform:uppercase;
+}
+
+.hero-news-content h3{
+    margin-top:8px;
+    font-size:14px;
+    line-height:1.45;
+}
+
+/* SECTION */
+
+.section{
+    padding:42px 0;
+}
+
+.section-heading{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.section-heading h2{
+    font-size:29px;
+    letter-spacing:-1px;
+}
+
+.section-heading h2 span{
+    color:var(--green);
+}
+
+.section-heading a{
+    color:var(--green);
+    font-size:10px;
+    font-weight:1000;
+}
+
+/* MATCHES */
+
+.matches{
+    padding:52px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:
+        radial-gradient(circle at 50% 0%,rgba(0,229,141,.12),transparent 45%),
+        rgba(255,255,255,.015);
+}
+
+.match-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.match-card{
+    position:relative;
+    overflow:hidden;
+    padding:22px;
+    border:1px solid var(--line);
+    border-radius:23px;
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.105),
+        rgba(255,255,255,.035)
+    );
+    box-shadow:var(--shadow);
+    transition:.35s;
+    transform-style:preserve-3d;
+}
+
+.match-card:before{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    right:-70px;
+    top:-70px;
+    border-radius:50%;
+    background:rgba(0,229,141,.09);
+    filter:blur(8px);
+}
+
+.match-card:hover{
+    border-color:rgba(0,229,141,.45);
+}
+
+.match-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.match-type{
+    color:var(--lime);
+    font-size:9px;
+    font-weight:1000;
+    text-transform:uppercase;
+}
+
+.match-status{
+    color:#ff7180;
+    font-size:8px;
+    font-weight:1000;
+}
+
+.match-series{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.teams{
+    display:grid;
+    gap:8px;
+    margin:17px 0;
+}
+
+.team{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px;
+    border-radius:11px;
+    background:rgba(0,0,0,.18);
+    border:1px solid rgba(255,255,255,.055);
+    font-size:13px;
+    font-weight:900;
+    transform:translateZ(20px);
+}
+
+.team-badge{
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    color:#03120d;
+    background:linear-gradient(145deg,var(--lime),var(--green));
+    font-size:8px;
+    font-weight:1000;
+}
+
+.match-time{
+    font-size:22px;
+    font-weight:1000;
+}
+
+.match-zone{
+    margin-top:3px;
+    color:var(--green);
+    font-size:9px;
+    font-weight:800;
+}
+
+.venue{
+    min-height:31px;
+    margin-top:10px;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.55;
+}
+
+.match-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:16px;
+}
+
+.match-buttons .btn{
+    flex:1;
+}
+
+/* NEWS */
+
+.content-layout{
+    display:grid;
+    grid-template-columns:1.65fr .7fr;
+    gap:25px;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:19px;
+}
+
+.news-card{
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+    transition:.35s;
+    transform-style:preserve-3d;
+}
+
+.news-card:hover{
+    border-color:rgba(0,229,141,.4);
+}
+
+.news-photo{
+    height:195px;
+    position:relative;
+    overflow:hidden;
+}
+
+.news-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.news-card:hover .news-photo img{
+    transform:scale(1.08);
+}
+
+.news-category{
+    position:absolute;
+    left:12px;
+    top:12px;
+    padding:6px 8px;
+    border-radius:7px;
+    color:var(--lime);
+    background:rgba(0,0,0,.65);
+    border:1px solid var(--line);
+    font-size:8px;
+    font-weight:1000;
+}
+
+.news-body{
+    padding:17px;
+}
+
+.meta{
+    display:flex;
+    gap:12px;
+    color:var(--muted);
+    font-size:9px;
+    margin-bottom:9px;
+}
+
+.news-body h3{
+    font-size:16px;
+    line-height:1.4;
+    margin-bottom:8px;
+}
+
+.news-body p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.55;
+}
+
+/* SIDEBAR */
+
+.sidebar-card{
+    padding:21px;
+    margin-bottom:19px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(15px);
+}
+
+.sidebar-card h3{
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.popular-item{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:9px;
+    padding:13px 0;
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.popular-item:last-child{
+    border-bottom:0;
+}
+
+.pop-number{
+    color:var(--green);
+    font-size:19px;
+    font-weight:1000;
+}
+
+.popular-item h4{
+    font-size:11px;
+    line-height:1.45;
+}
+
+.popular-item small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:4px;
+}
+
+/* LIVE SCORES */
+
+.live-section{
+    padding:52px 0;
+    background:rgba(255,255,255,.018);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.score-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.score-card{
+    padding:22px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.09),
+        rgba(255,255,255,.03)
+    );
+    box-shadow:var(--shadow);
+    transition:.35s;
+    transform-style:preserve-3d;
+}
+
+.score-card:hover{
+    border-color:rgba(0,229,141,.4);
+}
+
+.score-status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 8px;
+    border-radius:6px;
+    color:#ff7885;
+    background:rgba(255,64,85,.1);
+    font-size:8px;
+    font-weight:1000;
+}
+
+.score-status i{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 10px var(--red);
+}
+
+.score-card h3{
+    margin:13px 0 5px;
+    font-size:15px;
+}
+
+.score-card p{
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.5;
+    margin-bottom:17px;
+}
+
+/* BLOG */
+
+.blog-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.blog-card{
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+    transition:.4s;
+    transform-style:preserve-3d;
+}
+
+.blog-card:hover{
+    border-color:rgba(0,229,141,.4);
+}
+
+.blog-image{
+    height:205px;
+    overflow:hidden;
+}
+
+.blog-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.blog-card:hover img{
+    transform:scale(1.08);
+}
+
+.blog-content{
+    padding:20px;
+}
+
+.blog-label{
+    color:var(--green);
+    font-size:8px;
+    font-weight:1000;
+    letter-spacing:1px;
+}
+
+.blog-content h3{
+    margin:9px 0;
+    font-size:17px;
+    line-height:1.4;
+}
+
+.blog-content p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* TOURNAMENTS */
+
+.tournament-section{
+    padding:45px 0;
+}
+
+.tournament-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.tournament-card{
+    min-height:175px;
+    padding:21px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:linear-gradient(
+        145deg,
+        rgba(0,229,141,.13),
+        rgba(255,255,255,.035)
+    );
+    box-shadow:var(--shadow);
+    transition:.35s;
+    transform-style:preserve-3d;
+}
+
+.tournament-card:hover{
+    border-color:rgba(0,229,141,.4);
+}
+
+.tournament-icon{
+    font-size:31px;
+    transform:translateZ(25px);
+}
+
+.tournament-card h3{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.tournament-card p{
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.5;
+}
+
+/* NEWSLETTER */
+
+.newsletter{
+    margin:40px auto 50px;
+    padding:37px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+    border:1px solid var(--line);
+    border-radius:26px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(217,255,69,.16),transparent 30%),
+        linear-gradient(135deg,rgba(0,229,141,.14),rgba(255,255,255,.035));
+    box-shadow:var(--shadow);
+}
+
+.newsletter h2{
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.newsletter p{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.newsletter-form{
+    display:flex;
+    width:420px;
+    max-width:100%;
+}
+
+.newsletter-form input{
+    flex:1;
+    min-width:0;
+    padding:14px;
+    color:#fff;
+    outline:none;
+    border:1px solid var(--line);
+    border-right:0;
+    border-radius:9px 0 0 9px;
+    background:rgba(0,0,0,.25);
+}
+
+.newsletter-form button{
+    padding:0 19px;
+    border:0;
+    border-radius:0 9px 9px 0;
+    background:linear-gradient(145deg,var(--lime),var(--green));
+    color:#03130d;
+    font-size:11px;
+    font-weight:1000;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    background:#010907;
+    border-top:1px solid var(--line);
+    padding:48px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:35px;
+    padding-bottom:35px;
+}
+
+.footer-brand{
+    max-width:340px;
+}
+
+.footer-brand .logo{
+    margin-bottom:15px;
+}
+
+.footer-brand p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.7;
+}
+
+footer h4{
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+footer ul{
+    list-style:none;
+}
+
+footer li{
+    margin:9px 0;
+}
+
+footer li a{
+    color:var(--muted);
+    font-size:10px;
+}
+
+footer li a:hover{
+    color:var(--green);
+}
+
+.copyright{
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.07);
+    text-align:center;
+    color:#53665f;
+    font-size:9px;
+}
+
+/* SEARCH RESULT */
+
+.search-result{
+    display:none;
+    margin-bottom:18px;
+    padding:12px 15px;
+    border-radius:10px;
+    color:var(--green);
+    background:rgba(0,229,141,.07);
+    border:1px solid rgba(0,229,141,.18);
+    font-size:11px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+    .nav{
+        gap:14px;
+    }
+
+    .search{
+        width:145px;
+    }
+
+    .hero-layout,
+    .content-layout{
+        grid-template-columns:1fr;
+    }
+
+    .match-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .tournament-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:780px){
+
+    .topbar{
+        display:none;
+    }
+
+    .header{
+        height:68px;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .header-actions .search{
+        display:none;
+    }
+
+    .nav{
+        display:none;
+        position:absolute;
+        top:68px;
+        left:0;
+        right:0;
+        padding:20px 5%;
+        flex-direction:column;
+        align-items:flex-start;
+        background:rgba(2,11,8,.98);
+        border-bottom:1px solid var(--line);
+    }
+
+    .nav.open{
+        display:flex;
+    }
+
+    .hero{
+        padding-top:25px;
+    }
+
+    .hero-main{
+        min-height:510px;
+        padding:28px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .match-grid,
+    .score-grid,
+    .blog-grid{
+        grid-template-columns:1fr;
+    }
+
+    .newsletter{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .newsletter-form{
+        width:100%;
+    }
+}
+
+@media(max-width:540px){
+
+    .logo{
+        font-size:20px;
+    }
+
+    .logo-box{
+        width:39px;
+        height:39px;
+    }
+
+    .hero-main{
+        min-height:530px;
+        padding:23px;
+        border-radius:22px;
+    }
+
+    .hero h1{
+        font-size:34px;
+        letter-spacing:-1.8px;
+    }
+
+    .hero-description{
+        font-size:12px;
+    }
+
+    .hero-news{
+        grid-template-columns:95px 1fr;
+    }
+
+    .hero-news img{
+        min-height:150px;
+    }
+
+    .news-grid{
+        grid-template-columns:1fr;
+    }
+
+    .tournament-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .newsletter{
+        padding:25px;
+    }
+
+    .newsletter h2{
+        font-size:23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="light light1"></div>
+<div class="light light2"></div>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+
+    <div class="container topbar-inner">
+
+        <span>♦ Welcome to Soltwatnews Cricket</span>
+
+        <div class="top-links">
+            <a href="#news">News</a>
+            <a href="#matches">Matches</a>
+            <a href="#blog">Blogs</a>
+            <a href="#newsletter">Subscribe</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="container header">
+
+        <a href="#home" class="logo">
+
+            <div class="logo-box">
+                <span>♦</span>
+            </div>
+
+            Soltwatnews
+
+        </a>
+
+
+        <nav class="nav" id="nav">
+
+            <a href="#home">Home</a>
+            <a href="#news">Cricket News</a>
+            <a href="#matches">Matches</a>
+            <a href="#scores">Live Scores</a>
+            <a href="#blog">Blog</a>
+            <a href="#tournaments">Tournaments</a>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <input
+                id="search"
+                class="search"
+                type="text"
+                placeholder="Search cricket..."
+            >
+
+            <button class="menu" id="menu">
+                ☰
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- BREAKING -->
+
+<div class="breaking">
+
+    <div class="container breaking-inner">
+
+        <div class="breaking-label">
+            BREAKING
+        </div>
+
+        <div class="ticker">
+
+            <div class="ticker-text">
+                Soltwatnews • Asian Games 2026 • Pakistan vs India Gold Medal Match •
+                Bangladesh vs Sri Lanka Bronze Medal Match • India vs West Indies 3rd ODI •
+                Cricket News • Match Updates • Live Scores • Cricket Blogs
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<main id="home">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="container hero-layout">
+
+
+        <article class="hero-main">
+
+            <div class="hero-content">
+
+                <span class="pill">
+                    SOLTWATNEWS • CRICKET
+                </span>
+
+                <h1>
+                    The Cricket World,
+                    <span>One Story At A Time.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Get cricket news, match previews, live-score links,
+                    tournament coverage and original cricket stories
+                    in one modern destination.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="#matches" class="btn btn-green">
+                        View Tomorrow's Matches →
+                    </a>
+
+                    <a href="#news" class="btn btn-dark">
+                        Latest Cricket News
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <div class="hero-side">
+
+
+            <article class="hero-news">
+
+                <img
+                    src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=700&q=85"
+                    alt="Cricket stadium"
+                >
+
+                <div class="hero-news-content">
+
+                    <small>Asian Games</small>
+
+                    <h3>
+                        Pakistan vs India Gold Medal Match
+                    </h3>
+
+                </div>
+
+            </article>
+
+
+            <article class="hero-news">
+
+                <img
+                    src="https://images.unsplash.com/photo-1580748141549-71748dbe0e08?auto=format&fit=crop&w=700&q=85"
+                    alt="Cricket player"
+                >
+
+                <div class="hero-news-content">
+
+                    <small>ODI Cricket</small>
+
+                    <h3>
+                        India vs West Indies 3rd ODI
+                    </h3>
+
+                </div>
+
+            </article>
+
+
+            <article class="hero-news">
+
+                <img
+                    src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=700&q=85"
+                    alt="Cricket field"
+                >
+
+                <div class="hero-news-content">
+
+                    <small>Match Preview</small>
+
+                    <h3>
+                        Bangladesh vs Sri Lanka Bronze Medal Match
+                    </h3>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MATCHES -->
+
+<section class="matches" id="matches">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>
+                Tomorrow's <span>Matches</span>
+            </h2>
+
+            <a
+                href="https://www.cricbuzz.com/cricket-series/12563/asian-games-2026/videos"
+                target="_blank"
+                rel="noopener"
+            >
+                Asian Games 2026 →
+            </a>
+
+        </div>
+
+
+        <div class="match-grid">
+
+
+            <!-- BANGLADESH VS SRI LANKA -->
+
+            <article class="match-card">
+
+                <div class="match-top">
+
+                    <span class="match-type">
+                        Bronze Medal Match
+                    </span>
+
+                    <span class="match-status">
+                        UPCOMING
+                    </span>
+
+                </div>
+
+                <div class="match-series">
+                    Asian Games 2026
+                </div>
+
+
+                <div class="teams">
+
+                    <div class="team">
+                        Bangladesh
+                        <span class="team-badge">BAN</span>
+                    </div>
+
+                    <div class="team">
+                        Sri Lanka
+                        <span class="team-badge">SL</span>
+                    </div>
+
+                </div>
+
+
+                <div class="match-time">
+                    5:30 AM
+                </div>
+
+                <div class="match-zone">
+                    12:00 AM GMT • 9:00 AM Local
+                </div>
+
+                <div class="venue">
+                    Korogi Sports Park, Nisshin
+                </div>
+
+
+                <div class="match-buttons">
+
+                    <a
+                        href="https://www.cricbuzz.com/live-cricket-scores/171061/ban-vs-sl-bronze-medal-match-asian-games-2026"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-green"
+                    >
+                        Live Score
+                    </a>
+
+                    <a
+                        href="https://www.cricbuzz.com/cricket-series/12563/asian-games-2026/videos"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-dark"
+                    >
+                        Series
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PAKISTAN VS INDIA -->
+
+            <article class="match-card">
+
+                <div class="match-top">
+
+                    <span class="match-type">
+                        Gold Medal Match
+                    </span>
+
+                    <span class="match-status">
+                        UPCOMING
+                    </span>
+
+                </div>
+
+                <div class="match-series">
+                    Asian Games 2026
+                </div>
+
+
+                <div class="teams">
+
+                    <div class="team">
+                        Pakistan
+                        <span class="team-badge">PAK</span>
+                    </div>
+
+                    <div class="team">
+                        India
+                        <span class="team-badge">IND</span>
+                    </div>
+
+                </div>
+
+
+                <div class="match-time">
+                    10:00 AM
+                </div>
+
+                <div class="match-zone">
+                    4:30 AM GMT • 1:30 PM Local
+                </div>
+
+                <div class="venue">
+                    Korogi Sports Park, Nisshin
+                </div>
+
+
+                <div class="match-buttons">
+
+                    <a
+                        href="https://www.cricbuzz.com/live-cricket-scores/171070/pak-vs-ind-gold-medal-match-asian-games-2026"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-green"
+                    >
+                        Live Score
+                    </a>
+
+                    <a
+                        href="https://www.cricbuzz.com/cricket-series/12563/asian-games-2026/videos"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-dark"
+                    >
+                        Series
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- INDIA VS WEST INDIES -->
+
+            <article class="match-card">
+
+                <div class="match-top">
+
+                    <span class="match-type">
+                        3rd ODI
+                    </span>
+
+                    <span class="match-status">
+                        UPCOMING
+                    </span>
+
+                </div>
+
+                <div class="match-series">
+                    West Indies Tour of India 2026
+                </div>
+
+
+                <div class="teams">
+
+                    <div class="team">
+                        India
+                        <span class="team-badge">IND</span>
+                    </div>
+
+                    <div class="team">
+                        West Indies
+                        <span class="team-badge">WI</span>
+                    </div>
+
+                </div>
+
+
+                <div class="match-time">
+                    2:00 PM
+                </div>
+
+                <div class="match-zone">
+                    8:30 AM GMT • 2:00 PM Local
+                </div>
+
+                <div class="venue">
+                    PCA International Cricket Stadium, Ground A, New Chandigarh
+                </div>
+
+
+                <div class="match-buttons">
+
+                    <a
+                        href="https://www.cricbuzz.com/live-cricket-scores/151554/ind-vs-wi-3rd-odi-west-indies-tour-of-india-2026"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-green"
+                    >
+                        Live Score
+                    </a>
+
+                    <a
+                        href="https://www.cricbuzz.com/cricket-series/11902/west-indies-tour-of-india-2026/videos"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-dark"
+                    >
+                        Series
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEWS -->
+
+<section class="section" id="news">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>
+                Latest <span>Cricket News</span>
+            </h2>
+
+            <a href="#">
+                View All →
+            </a>
+
+        </div>
+
+
+        <div id="searchResult" class="search-result"></div>
+
+
+        <div class="content-layout">
+
+
+            <div class="news-grid">
+
+
+                <article class="news-card searchable">
+
+                    <div class="news-photo">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=900&q=85"
+                            alt="Pakistan India cricket"
+                        >
+
+                        <span class="news-category">
+                            ASIAN GAMES
+                        </span>
+
+                    </div>
+
+                    <div class="news-body">
+
+                        <div class="meta">
+                            <span>Match Preview</span>
+                            <span>Soltwatnews</span>
+                        </div>
+
+                        <h3>
+                            Pakistan vs India Gold Medal Match takes centre stage
+                        </h3>
+
+                        <p>
+                            Follow the match build-up, timing, venue and
+                            direct live-score access.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="news-card searchable">
+
+                    <div class="news-photo">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=900&q=85"
+                            alt="Cricket stadium"
+                        >
+
+                        <span class="news-category">
+                            ASIAN GAMES
+                        </span>
+
+                    </div>
+
+                    <div class="news-body">
+
+                        <div class="meta">
+                            <span>Preview</span>
+                            <span>Cricket</span>
+                        </div>
+
+                        <h3>
+                            Bangladesh vs Sri Lanka Bronze Medal Match guide
+                        </h3>
+
+                        <p>
+                            Everything fans need before the bronze medal
+                            contest begins.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="news-card searchable">
+
+                    <div class="news-photo">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1580748141549-71748dbe0e08?auto=format&fit=crop&w=900&q=85"
+                            alt="Cricket player"
+                        >
+
+                        <span class="news-category">
+                            ODI
+                        </span>
+
+                    </div>
+
+                    <div class="news-body">
+
+                        <div class="meta">
+                            <span>India Tour</span>
+                            <span>ODI</span>
+                        </div>
+
+                        <h3>
+                            India vs West Indies 3rd ODI match update
+                        </h3>
+
+                        <p>
+                            Venue, timing and match-centre information for
+                            the upcoming ODI.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="news-card searchable">
+
+                    <div class="news-photo">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1562077772-3bd90403f7f0?auto=format&fit=crop&w=900&q=85"
+                            alt="Cricket bat"
+                        >
+
+                        <span class="news-category">
+                            ANALYSIS
+                        </span>
+
+                    </div>
+
+                    <div class="news-body">
+
+                        <div class="meta">
+                            <span>Feature</span>
+                            <span>Cricket</span>
+                        </div>
+
+                        <h3>
+                            What makes a big cricket match special?
+                        </h3>
+
+                        <p>
+                            A Soltwatnews feature on preparation, pressure,
+                            conditions and match-day atmosphere.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="news-card searchable">
+
+                    <div class="news-photo">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=900&q=85"
+                            alt="Cricket ground"
+                        >
+
+                        <span class="news-category">
+                            TOURNAMENT
+                        </span>
+
+                    </div>
+
+                    <div class="news-body">
+
+                        <div class="meta">
+                            <span>Asian Games</span>
+                            <span>Coverage</span>
+                        </div>
+
+                        <h3>
+                            Asian Games cricket tournament coverage
+                        </h3>
+
+                        <p>
+                            Match stories, tournament updates and cricket
+                            moments from the competition.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="news-card searchable">
+
+                    <div class="news-photo">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=900&q=85"
+                            alt="Cricket stadium"
+                        >
+
+                        <span class="news-category">
+                            FEATURES
+                        </span>
+
+                    </div>
+
+                    <div class="news-body">
+
+                        <div class="meta">
+                            <span>Soltwatnews</span>
+                            <span>Feature</span>
+                        </div>
+
+                        <h3>
+                            Cricket stories beyond the scoreboard
+                        </h3>
+
+                        <p>
+                            Player stories, tournament moments and the
+                            human side of the game.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+            <!-- SIDEBAR -->
+
+            <aside>
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        🔥 Most Read
+                    </h3>
+
+
+                    <div class="popular-item">
+
+                        <div class="pop-number">01</div>
+
+                        <div>
+
+                            <h4>
+                                Pakistan vs India Gold Medal Match preview
+                            </h4>
+
+                            <small>
+                                Asian Games 2026
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="popular-item">
+
+                        <div class="pop-number">02</div>
+
+                        <div>
+
+                            <h4>
+                                India vs West Indies 3rd ODI guide
+                            </h4>
+
+                            <small>
+                                ODI Cricket
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="popular-item">
+
+                        <div class="pop-number">03</div>
+
+                        <div>
+
+                            <h4>
+                                Bangladesh vs Sri Lanka bronze medal preview
+                            </h4>
+
+                            <small>
+                                Asian Games
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="popular-item">
+
+                        <div class="pop-number">04</div>
+
+                        <div>
+
+                            <h4>
+                                Cricket match-day stories and analysis
+                            </h4>
+
+                            <small>
+                                Soltwatnews Blog
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="popular-item">
+
+                        <div class="pop-number">05</div>
+
+                        <div>
+
+                            <h4>
+                                Latest international cricket updates
+                            </h4>
+
+                            <small>
+                                Cricket News
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        Categories
+                    </h3>
+
+                    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+
+                        <a href="#news" class="btn btn-dark">Test</a>
+                        <a href="#news" class="btn btn-dark">ODI</a>
+                        <a href="#news" class="btn btn-dark">T20</a>
+                        <a href="#matches" class="btn btn-dark">Matches</a>
+                        <a href="#blog" class="btn btn-dark">Blog</a>
+                        <a href="#tournaments" class="btn btn-dark">Events</a>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LIVE SCORES -->
+
+<section class="live-section" id="scores">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>
+                Live <span>Score Centre</span>
+            </h2>
+
+            <a href="#matches">
+                Match Centre →
+            </a>
+
+        </div>
+
+
+        <div class="score-grid">
+
+
+            <article class="score-card">
+
+                <span class="score-status">
+                    <i></i>
+                    UPCOMING
+                </span>
+
+                <h3>
+                    Bangladesh vs Sri Lanka
+                </h3>
+
+                <p>
+                    Asian Games 2026 • Bronze Medal Match
+                </p>
+
+                <a
+                    href="https://www.cricbuzz.com/live-cricket-scores/171061/ban-vs-sl-bronze-medal-match-asian-games-2026"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-green"
+                >
+                    Open Scorecard
+                </a>
+
+            </article>
+
+
+            <article class="score-card">
+
+                <span class="score-status">
+                    <i></i>
+                    UPCOMING
+                </span>
+
+                <h3>
+                    Pakistan vs India
+                </h3>
+
+                <p>
+                    Asian Games 2026 • Gold Medal Match
+                </p>
+
+                <a
+                    href="https://www.cricbuzz.com/live-cricket-scores/171070/pak-vs-ind-gold-medal-match-asian-games-2026"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-green"
+                >
+                    Open Scorecard
+                </a>
+
+            </article>
+
+
+            <article class="score-card">
+
+                <span class="score-status">
+                    <i></i>
+                    UPCOMING
+                </span>
+
+                <h3>
+                    India vs West Indies
+                </h3>
+
+                <p>
+                    West Indies Tour of India 2026 • 3rd ODI
+                </p>
+
+                <a
+                    href="https://www.cricbuzz.com/live-cricket-scores/151554/ind-vs-wi-3rd-odi-west-indies-tour-of-india-2026"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-green"
+                >
+                    Open Scorecard
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BLOG -->
+
+<section class="section" id="blog">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>
+                Soltwatnews <span>Cricket Blog</span>
+            </h2>
+
+            <a href="#">
+                Read More →
+            </a>
+
+        </div>
+
+
+        <div class="blog-grid">
+
+
+            <article class="blog-card">
+
+                <div class="blog-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=900&q=85"
+                        alt="Cricket match"
+                    >
+
+                </div>
+
+                <div class="blog-content">
+
+                    <span class="blog-label">
+                        MATCH PREVIEW
+                    </span>
+
+                    <h3>
+                        Pakistan vs India Gold Medal Match: What Fans Should Watch
+                    </h3>
+
+                    <p>
+                        Match timing, venue, competition context and where
+                        to follow the score.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card">
+
+                <div class="blog-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=900&q=85"
+                        alt="Cricket field"
+                    >
+
+                </div>
+
+                <div class="blog-content">
+
+                    <span class="blog-label">
+                        ASIAN GAMES
+                    </span>
+
+                    <h3>
+                        Bangladesh vs Sri Lanka Bronze Medal Match Guide
+                    </h3>
+
+                    <p>
+                        A quick guide to the bronze medal contest and
+                        important match information.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog-card">
+
+                <div class="blog-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1580748141549-71748dbe0e08?auto=format&fit=crop&w=900&q=85"
+                        alt="Cricket player"
+                    >
+
+                </div>
+
+                <div class="blog-content">
+
+                    <span class="blog-label">
+                        ODI PREVIEW
+                    </span>
+
+                    <h3>
+                        India vs West Indies 3rd ODI: Match Day Story
+                    </h3>
+
+                    <p>
+                        Venue, timing and scorecard information for the
+                        upcoming third ODI.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TOURNAMENT HUB -->
+
+<section class="tournament-section" id="tournaments">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <h2>
+                Tournament <span>Hub</span>
+            </h2>
+
+            <a href="#">
+                Explore All →
+            </a>
+
+        </div>
+
+
+        <div class="tournament-grid">
+
+
+            <a
+                class="tournament-card"
+                href="https://www.cricbuzz.com/cricket-series/12563/asian-games-2026/videos"
+                target="_blank"
+                rel="noopener"
+            >
+
+                <div class="tournament-icon">
+                    🏆
+                </div>
+
+                <div>
+
+                    <h3>
+                        Asian Games 2026
+                    </h3>
+
+                    <p>
+                        Match updates, videos and tournament coverage.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a
+                class="tournament-card"
+                href="https://www.cricbuzz.com/cricket-series/11902/west-indies-tour-of-india-2026/videos"
+                target="_blank"
+                rel="noopener"
+            >
+
+                <div class="tournament-icon">
+                    🏏
+                </div>
+
+                <div>
+
+                    <h3>
+                        West Indies Tour of India 2026
+                    </h3>
+
+                    <p>
+                        ODI series updates and match coverage.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <div class="tournament-card">
+
+                <div class="tournament-icon">
+                    🌍
+                </div>
+
+                <div>
+
+                    <h3>
+                        International Cricket
+                    </h3>
+
+                    <p>
+                        International cricket stories and updates.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tournament-card">
+
+                <div class="tournament-icon">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <h3>
+                        Cricket Features
+                    </h3>
+
+                    <p>
+                        Players, teams, records and cricket analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+
+<section class="container" id="newsletter">
+
+    <div class="newsletter">
+
+        <div>
+
+            <h2>
+                Never Miss a Cricket Update
+            </h2>
+
+            <p>
+                Get Soltwatnews stories, match previews and cricket updates.
+            </p>
+
+        </div>
+
+
+        <form class="newsletter-form" id="newsletterForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                required
+            >
+
+            <button type="submit">
+                Subscribe
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a href="#home" class="logo">
+
+                    <div class="logo-box">
+                        <span>♦</span>
+                    </div>
+
+                    Soltwatnews
+
+                </a>
+
+                <p>
+                    Soltwatnews is a modern cricket news and blog platform
+                    covering match updates, cricket stories, tournaments,
+                    live-score links and original features.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>Cricket</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="#news">Latest News</a>
+                    </li>
+
+                    <li>
+                        <a href="#matches">Match Updates</a>
+                    </li>
+
+                    <li>
+                        <a href="#scores">Live Scores</a>
+                    </li>
+
+                    <li>
+                        <a href="#blog">Cricket Blog</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>Coverage</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="#tournaments">Tournaments</a>
+                    </li>
+
+                    <li>
+                        <a href="#news">ODI Cricket</a>
+                    </li>
+
+                    <li>
+                        <a href="#news">T20 Cricket</a>
+                    </li>
+
+                    <li>
+                        <a href="#news">International</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h4>Soltwatnews</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="#">About Us</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Privacy Policy</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Terms & Conditions</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+            © 2026 Soltwatnews. All Rights Reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* MOBILE MENU */
+
+const menu = document.getElementById("menu");
+const nav = document.getElementById("nav");
+
+menu.addEventListener("click",function(){
+
+    nav.classList.toggle("open");
+
+});
+
+
+document.querySelectorAll(".nav a").forEach(function(link){
+
+    link.addEventListener("click",function(){
+
+        nav.classList.remove("open");
+
+    });
+
+});
+
+
+/* SEARCH */
+
+const search = document.getElementById("search");
+const cards = document.querySelectorAll(".searchable");
+const searchResult = document.getElementById("searchResult");
+
+search.addEventListener("input",function(){
+
+    const query = this.value.toLowerCase().trim();
+
+    let found = 0;
+
+    cards.forEach(function(card){
+
+        const text = card.innerText.toLowerCase();
+
+        if(query === "" || text.includes(query)){
+
+            card.style.display = "";
+            found++;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    if(query !== ""){
+
+        searchResult.style.display = "block";
+
+        searchResult.innerHTML =
+            found +
+            " result(s) found for <strong>" +
+            query +
+            "</strong>";
+
+    }else{
+
+        searchResult.style.display = "none";
+
+    }
+
+});
+
+
+/* NEWSLETTER */
+
+document
+.getElementById("newsletterForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("email").value;
+
+    if(email){
+
+        alert(
+            "Thanks for subscribing to Soltwatnews!"
+        );
+
+        this.reset();
+
+    }
+
+});
+
+
+/* 3D CARD TILT */
+
+const tiltCards = document.querySelectorAll(
+    ".match-card,.news-card,.score-card,.blog-card,.tournament-card,.hero-news"
+);
+
+tiltCards.forEach(function(card){
+
+    card.addEventListener("mousemove",function(e){
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY =
+            ((x-centerX)/centerX)*4;
+
+        const rotateX =
+            ((centerY-y)/centerY)*4;
+
+        card.style.transform =
+            `perspective(1000px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-6px)`;
+
+    });
+
+
+    card.addEventListener("mouseleave",function(){
+
+        card.style.transform =
+            "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
+
+    });
+
+});
+
+
+/* BACKGROUND PARALLAX */
+
+window.addEventListener("mousemove",function(e){
+
+    const x =
+        (e.clientX/window.innerWidth-.5)*18;
+
+    const y =
+        (e.clientY/window.innerHeight-.5)*18;
+
+    document.querySelector(".light1").style.transform =
+        `translate(${x}px,${y}px)`;
+
+    document.querySelector(".light2").style.transform =
+        `translate(${-x}px,${-y}px)`;
+
+});
+
+
+/* CLOSE MOBILE NAV */
+
+document.addEventListener("click",function(e){
+
+    if(
+        !nav.contains(e.target) &&
+        !menu.contains(e.target)
+    ){
+
+        nav.classList.remove("open");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+```
